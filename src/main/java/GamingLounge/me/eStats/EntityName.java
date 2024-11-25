@@ -5,23 +5,25 @@ import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Item;
 
 import net.kyori.adventure.text.Component;
 
 public class EntityName {
     
 
-        public static final NamespacedKey ignore = new NamespacedKey("Estats", "ignore"); //creates the substructure for the persistantdatacontainer and "ignore" it self.
+        public static final NamespacedKey ignore = new NamespacedKey("estats", "ignore"); //creates the substructure for the persistantdatacontainer and "ignore" it self.
 
 
         //Method to give entitys a name/nametag -> latter on giving it the stats.
 public void scaner(){
 
-Bukkit.getScheduler().runTaskTimer(null, ()->{
+Bukkit.getScheduler().runTaskTimer(EStats.INSTANCE/*Why the f does this have to be called EStats.INSTANCE....... */, ()->{
 
 for (World world : Bukkit.getWorlds()){ //creates the component world which is everry world
     for (Entity activeEntitys : world.getEntities()){//gets the entity's in that world and puts it in the component activeEntitys
-        if (activeEntitys.getPersistentDataContainer().has(ignore)) return;//checks if it is not supposed to be renamed, by checking for the ignore persistant data container.
+        if (activeEntitys.getPersistentDataContainer().has(ignore)) continue;//checks if it is not supposed to be renamed, by checking for the ignore persistant data container.
+        if (activeEntitys instanceof Item)continue/*skipes this if and goes back to the beginning?*/;
         activeEntitys.customName(Component.text("Test")/*Everrything within this can be a component insted of an componant that is the text within this. */);
         activeEntitys.setCustomNameVisible(true);
     }
