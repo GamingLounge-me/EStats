@@ -4,9 +4,10 @@ package GamingLounge.me.eStats;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.World;
+import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.FallingBlock;
-import org.bukkit.entity.Item;
+
 
 import net.kyori.adventure.text.Component;
 
@@ -26,22 +27,17 @@ for (World world : Bukkit.getWorlds()){ //creates the component world which is e
 
         if (
             activeEntitys.getPersistentDataContainer().has(ignore)||//checks if it is not supposed to be renamed, by checking for the ignore persistant data container.
-            activeEntitys instanceof Item||//Ignores Item's
-            activeEntitys instanceof FallingBlock//Ignores Falligstuff Like Sand and so on
+            activeEntitys instanceof ArmorStand||
+            !(activeEntitys instanceof Damageable)//Should do the trick
             ) continue;
 
-        for (Entity player : Bukkit.getOnlinePlayers()){
-
-            if (player.getWorld()!= activeEntitys.getWorld())continue; //Fixes the plugin checking for the distance between the player and and entity that is not in the same world, by comparing if they are in the same world.
-            if (player.getLocation().distanceSquared(activeEntitys.getLocation()) <= 100){//Checks for entitys surounding the Entity player pls use radius^2. ;)
-                activeEntitys.customName(Component.text("Test"));//Everrything within this can be a component instead of an componant that is the text within this.
-                activeEntitys.setCustomNameVisible(true);//Should activate the name
-            }
-                
+        if(activeEntitys.getWorld().getNearbyPlayers(activeEntitys.getLocation(), 10).size()>0){//Size checks if the total ammount of players within 10 block's in higher then 0.
+            activeEntitys.customName(Component.text("Test"));//Everrything within this can be a component instead of an componant that is the text within this.
+            activeEntitys.setCustomNameVisible(true);//Should activate the name
+        }
             else{//If the Entity is further out then it will do the following
                 activeEntitys.setCustomNameVisible(false);//Should deactivate the name.
             }
-        }
     }
 }}, 0, 20);
 
