@@ -15,7 +15,7 @@ public class EntityName {
         public static final NamespacedKey ignore = new NamespacedKey("estats", "ignore"); //creates the substructure for the persistantdatacontainer and "ignore" it self.
 
 
-        //Method to give entitys a name/nametag -> latter on giving it the stats.
+        //Method to give entitys a name -> latter on giving it the stats.
 public void scaner(){
 
 Bukkit.getScheduler().runTaskTimer(EStats.INSTANCE/*Why the f does this have to be called EStats.INSTANCE....... */, ()->{
@@ -26,8 +26,15 @@ for (World world : Bukkit.getWorlds()){ //creates the component world which is e
         if (activeEntitys instanceof Item)continue/*skipes this if and goes back to the beginning?*/;
         for (Entity player : Bukkit.getOnlinePlayers()){
             if (player.getLocation().distanceSquared(activeEntitys.getLocation()) <= 10 * 10)/*Checks for entitys surounding the Entity player*/{
-                activeEntitys.setCustomNameVisible(true);//Should activate the name idk if it also deactivates
+                activeEntitys.setCustomNameVisible(true);//Should activate the name
                 activeEntitys.customName(Component.text("Test")/*Everrything within this can be a component instead of an componant that is the text within this. */);
+/*                if (!(player.getLocation().distanceSquared(activeEntitys.getLocation()) <= 10 * 10)){//Checks if entity is not within this 10*10 range
+                    activeEntitys.setCustomNameVisible(false);//Should deactivate the name
+                } */
+                if(player.getLocation().distanceSquared(activeEntitys.getLocation()) > 10 * 10){/*Checks if the entity is further out then this. */
+                    activeEntitys.setCustomNameVisible(false);//Should deactivate the name.
+                    activeEntitys.remove();//debuging
+                }
             }
         }
     }
