@@ -24,8 +24,12 @@ for (World world : Bukkit.getWorlds()){ //creates the component world which is e
     for (Entity activeEntitys : world.getEntities()){//gets the entity's in that world and puts it in the component activeEntitys
         if (activeEntitys.getPersistentDataContainer().has(ignore)) continue;//checks if it is not supposed to be renamed, by checking for the ignore persistant data container.
         if (activeEntitys instanceof Item)continue/*skipes this if and goes back to the beginning?*/;
-        activeEntitys.customName(Component.text("Test")/*Everrything within this can be a component insted of an componant that is the text within this. */);
-        activeEntitys.setCustomNameVisible(true);
+        for (Entity player : Bukkit.getOnlinePlayers()){
+            if (player.getLocation().distanceSquared(activeEntitys.getLocation()) <= 10 * 10)/*Checks for entitys surounding the Entity player*/{
+                activeEntitys.setCustomNameVisible(true);//Should activate the name idk if it also deactivates
+                activeEntitys.customName(Component.text("Test")/*Everrything within this can be a component instead of an componant that is the text within this. */);
+            }
+        }
     }
 }}, 0, 20);
 
