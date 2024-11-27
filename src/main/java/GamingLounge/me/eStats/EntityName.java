@@ -1,15 +1,19 @@
 package GamingLounge.me.eStats;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.World;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.inventory.EntityEquipment;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.md_5.bungee.api.chat.hover.content.Item;
 
 public class EntityName {
 
@@ -28,12 +32,22 @@ public class EntityName {
                     if (activeEntity.getPersistentDataContainer().has(IGNORE, PersistentDataType.BYTE)
                             || activeEntity instanceof ArmorStand
                             || !(activeEntity instanceof Damageable)
-                            || !(activeEntity instanceof LivingEntity)) {
+                            || !(activeEntity instanceof LivingEntity)
+                            || !(activeEntity instanceof Item)) {
                         continue;
                     }
 
                     // Check if players are nearby
                     if (activeEntity.getWorld().getNearbyPlayers(activeEntity.getLocation(), 15).size() > 0) {
+                          if(activeEntity instanceof Item){
+                            Component itemNameTag;
+
+//                            ItemStack material = new activeEntity.
+
+                            itemNameTag = miniMessage.deserialize("Item");
+                            activeEntity.customName(itemNameTag);
+                        continue;
+                    }
                         if (!activeEntity.getPersistentDataContainer().has(LEVEL, PersistentDataType.INTEGER)) {
                             // If the entity does not have a Level, set it to 1
                             activeEntity.getPersistentDataContainer().set(LEVEL, PersistentDataType.INTEGER, 1);
