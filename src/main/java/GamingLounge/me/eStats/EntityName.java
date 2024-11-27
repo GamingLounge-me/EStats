@@ -1,15 +1,15 @@
 package GamingLounge.me.eStats;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.World;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.inventory.EntityEquipment;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -22,7 +22,23 @@ public class EntityName {
 
     MiniMessage miniMessage = MiniMessage.miniMessage();
 
+private Map<Entity, Long> map;
+
+public void add_(Entity damagedEntity) {
+    map.put(damagedEntity, System.currentTimeMillis() + 2_990); // create time plus 3 seconds
+}
+public long get_(Entity damagedEntity) {
+    if(!map.containsKey(damagedEntity)) return Long.MIN_VALUE;
+        return map.get(damagedEntity);
+}
+public void remove_(Entity damagedEntity) {
+    if (get_(damagedEntity) > System.currentTimeMillis()) return;
+    if(map.containsKey(damagedEntity))
+    map.remove(damagedEntity);
+}
     public void scanner() {
+        map = new HashMap<>();
+
         // Schedule a repeating task
         Bukkit.getScheduler().runTaskTimer(EStats.INSTANCE, () -> {
             for (World world : Bukkit.getWorlds()) { // Iterate through all worlds
@@ -30,16 +46,18 @@ public class EntityName {
 
                     // Skip entities that are ignored or invalid
                     if (activeEntity.getPersistentDataContainer().has(IGNORE, PersistentDataType.BYTE)
-                            || activeEntity instanceof ArmorStand
+                            || activeEntity instanceof ArmorStand 
+                            || map.containsKey(activeEntity)
                             || !(activeEntity instanceof Damageable)
-                            || !(activeEntity instanceof LivingEntity)
-                            || !(activeEntity instanceof Item)) {
+                            || !(activeEntity instanceof LivingEntity)) {
                         continue;
                     }
 
                     // Check if players are nearby
                     if (activeEntity.getWorld().getNearbyPlayers(activeEntity.getLocation(), 15).size() > 0) {
-                          if(activeEntity instanceof Item){
+
+//This will be broken cause it has to happen before we filter for living&damagable entitys
+                        if(activeEntity instanceof Item){
                             Component itemNameTag;
 
 //                            ItemStack material = new activeEntity.
@@ -94,10 +112,11 @@ public class EntityName {
                         activeEntity.customName(entityNameTag);
 
                     } else { // No players nearby
-                        activeEntity.setCustomNameVisible(false); // Disable custom name visibility
+                        activeEntity.customName(null);// Disable custom name.
+                        activeEntity.setCustomNameVisible(false);
                     }
                 }
             }
-        }, 0, 20); // Repeat task every 20 ticks (1 second)
+        }, 0, 15); // Repeat task every 15 ticks (0.75 seconds)
     }
 }
