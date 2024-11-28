@@ -16,8 +16,8 @@ public class GetDamage implements Listener {
     @EventHandler
     public void onDamagedbBy(EntityDamageByEntityEvent event){
 
-//        damageTest(event.getDamage(), event.getEntity().getType(), event.getDamager().getName(),event.getDamageSource().getDamageType());
-        damageDisplay(event.getDamage(),event.getDamager());
+        //damageTest(event.getDamage(), event.getEntity().getType(), event.getDamager().getName(),event.getDamageSource().getDamageType());
+        //damageDisplay(event.getDamage(),event.getDamager());
         EStats.INSTANCE.entityName.add_(event.getEntity());
         event.getEntity().customName(null);
         event.getEntity().setCustomNameVisible(false);

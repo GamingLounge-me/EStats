@@ -11,6 +11,7 @@ import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.persistence.PersistentDataType;
+
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.md_5.bungee.api.chat.hover.content.Item;
@@ -21,21 +22,20 @@ public class EntityName {
     public static final NamespacedKey LEVEL = new NamespacedKey("estats", "level");   // PersistentDataContainer key for "level".
 
     MiniMessage miniMessage = MiniMessage.miniMessage();
+    
+    private Map<Entity, Long> map;
 
-private Map<Entity, Long> map;
-
-public void add_(Entity damagedEntity) {
-    map.put(damagedEntity, System.currentTimeMillis() + 2_990); // create time plus 3 seconds
-}
-public long get_(Entity damagedEntity) {
-    if(!map.containsKey(damagedEntity)) return Long.MIN_VALUE;
-        return map.get(damagedEntity);
-}
-public void remove_(Entity damagedEntity) {
-    if (get_(damagedEntity) > System.currentTimeMillis()) return;
-    if(map.containsKey(damagedEntity))
-    map.remove(damagedEntity);
-}
+    public void add_(Entity damagedEntity) {
+        map.put(damagedEntity, System.currentTimeMillis() + 2_900); // create time plus 3 seconds
+    }
+    public long get_(Entity damagedEntity) {
+        if(!map.containsKey(damagedEntity)) return Long.MIN_VALUE;
+            return map.get(damagedEntity);
+    }
+    public void remove_(Entity damagedEntity) {
+        if (get_(damagedEntity) > System.currentTimeMillis()) return;
+        if (map.containsKey(damagedEntity)) map.remove(damagedEntity);
+    }
     public void scanner() {
         map = new HashMap<>();
 
@@ -56,23 +56,25 @@ public void remove_(Entity damagedEntity) {
                     // Check if players are nearby
                     if (activeEntity.getWorld().getNearbyPlayers(activeEntity.getLocation(), 15).size() > 0) {
 
-//This will be broken cause it has to happen before we filter for living&damagable entitys
+                        //This will be broken cause it has to happen before we filter for living&damagable entitys
                         if(activeEntity instanceof Item){
                             Component itemNameTag;
 
-//                            ItemStack material = new activeEntity.
-
                             itemNameTag = miniMessage.deserialize("Item");
                             activeEntity.customName(itemNameTag);
-                        continue;
-                    }
-                        if (!activeEntity.getPersistentDataContainer().has(LEVEL, PersistentDataType.INTEGER)) {
-                            // If the entity does not have a Level, set it to 1
-                            activeEntity.getPersistentDataContainer().set(LEVEL, PersistentDataType.INTEGER, 1);
+                            activeEntity.setCustomNameVisible(true); // Enable custom name visibility
                             continue;
                         }
 
-                        Integer entityLevel = activeEntity.getPersistentDataContainer().get(LEVEL, PersistentDataType.INTEGER);
+                        // If the entity does not have a Level, set it to 1
+                        Integer entityLevel;
+                        if (!activeEntity.getPersistentDataContainer().has(LEVEL, PersistentDataType.INTEGER)) {
+                            entityLevel = 1;
+                            activeEntity.getPersistentDataContainer().set(LEVEL, PersistentDataType.INTEGER, entityLevel);
+                            continue;
+                        } else {
+                            entityLevel= activeEntity.getPersistentDataContainer().get(LEVEL, PersistentDataType.INTEGER);
+                        }
 
                         // Null safety check
                         if (entityLevel == null|| entityLevel == 0) {
