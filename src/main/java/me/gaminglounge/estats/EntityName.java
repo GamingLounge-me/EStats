@@ -22,7 +22,7 @@ public class EntityName {
     public static final NamespacedKey LEVEL = new NamespacedKey("estats", "level");   // PersistentDataContainer key for "level".
 
     MiniMessage miniMessage = MiniMessage.miniMessage();
-    
+
     private Map<Entity, Long> map;
 
     public void add_(Entity damagedEntity) {
@@ -46,7 +46,7 @@ public class EntityName {
 
                     // Skip entities that are ignored or invalid
                     if (activeEntity.getPersistentDataContainer().has(IGNORE, PersistentDataType.BYTE)
-                            || activeEntity instanceof ArmorStand 
+                            || activeEntity instanceof ArmorStand
                             || map.containsKey(activeEntity)
                             || !(activeEntity instanceof Damageable)
                             || !(activeEntity instanceof LivingEntity)) {

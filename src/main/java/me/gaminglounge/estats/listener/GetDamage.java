@@ -22,19 +22,19 @@ public class GetDamage implements Listener {
         event.getEntity().customName(null);
         event.getEntity().setCustomNameVisible(false);
         Bukkit.getScheduler().runTaskLater(EStats.INSTANCE, ()->EStats.INSTANCE.entityName.remove_(event.getEntity()), 60);
-    }     
-    
+    }
+
     public void damageDisplay(double damage, Entity damager) {
 
     }
 
-/* 
+/*
 Just a Test
 
     public void damageTest(Double damage, EntityType entity, String damager, DamageType damageType){
 
         System.out.println(entity+": Took "+damage+""+damageType+" damage from "+damager+".");
-    
+
     }*/
 
 }
