@@ -1,4 +1,4 @@
-package GamingLounge.me.eStats;
+package me.gaminglounge.estats;
 
 import java.util.HashMap;
 import java.util.Map;

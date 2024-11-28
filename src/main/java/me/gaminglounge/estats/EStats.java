@@ -1,10 +1,10 @@
-package GamingLounge.me.eStats;
+package me.gaminglounge.estats;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import GamingLounge.me.listener.GetDamage;
+import me.gaminglounge.estats.listener.GetDamage;
 
 public final class EStats extends JavaPlugin {
 

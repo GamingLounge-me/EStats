@@ -1,4 +1,4 @@
 name: EStats
 version: '1.0-SNAPSHOT'
-main: GamingLounge.me.eStats.EStats
+main: me.gaminglounge.estats.EStats
 api-version: '1.21'

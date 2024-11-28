@@ -1,4 +1,4 @@
-package GamingLounge.me.listener;
+package me.gaminglounge.estats.listener;
 
 
 import org.bukkit.Bukkit;
@@ -7,7 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-import GamingLounge.me.eStats.EStats;
+import me.gaminglounge.estats.EStats;
 
 
 //Class to catch damage, add/check for custom sources and calculate the real damage beeing dealtl, also want to add textdisplays around the entity position with the damage that was taken.
