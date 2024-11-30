@@ -11,7 +11,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.TextDisplay;
 import org.bukkit.entity.Display.Billboard;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 import me.gaminglounge.estats.EStats;
 import net.kyori.adventure.text.minimessage.MiniMessage;
