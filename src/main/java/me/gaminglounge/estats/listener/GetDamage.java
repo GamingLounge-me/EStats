@@ -48,10 +48,13 @@ public class GetDamage implements Listener {
 
             LivingEntity living = (LivingEntity) event.getEntity();
 
-            int HP = (int) (((living.getHealth()- event.getDamage())/living.getAttribute(org.bukkit.attribute.Attribute.GENERIC_MAX_HEALTH).getValue())*10);
+            int HP = (int) ((living.getHealth()/living.getAttribute(org.bukkit.attribute.Attribute.GENERIC_MAX_HEALTH).getValue())*10);
             System.out.println (HP);
 
             switch (HP) {
+                case 0:
+                event.getEntity().customName(miniMessage.deserialize("<gray>[</gray><red>▮         </red><gray>]</gray>"));
+                break;
                 case 1:
                     event.getEntity().customName(miniMessage.deserialize("<gray>[</gray><red>▮         </red><gray>]</gray>"));
                 break;
