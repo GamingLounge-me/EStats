@@ -5,11 +5,11 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.entity.Display.Billboard;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TextDisplay;
-import org.bukkit.entity.Display.Billboard;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -48,7 +48,7 @@ public class GetDamage implements Listener {
 
             LivingEntity living = (LivingEntity) event.getEntity();
 
-            int HP = (int) ((living.getHealth()/living.getAttribute(org.bukkit.attribute.Attribute.GENERIC_MAX_HEALTH).getValue())*10);
+            int HP = (int) (((living.getHealth() - event.getDamage())/living.getAttribute(org.bukkit.attribute.Attribute.GENERIC_MAX_HEALTH).getValue())*10);
             System.out.println (HP);
 
             switch (HP) {
