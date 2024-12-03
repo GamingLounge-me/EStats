@@ -5,6 +5,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.entity.Display.Billboard;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -22,6 +23,8 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 public class GetDamage implements Listener {
 
     MiniMessage miniMessage = MiniMessage.miniMessage();
+    double randomLowPitch = ThreadLocalRandom.current().nextDouble(0.40, 0.80);
+    double volume = 0.3;
 
 
     @EventHandler
@@ -34,13 +37,14 @@ public class GetDamage implements Listener {
             event.getEntity().setCustomNameVisible(true);
             Bukkit.getScheduler().runTaskLater(EStats.INSTANCE, ()->EStats.INSTANCE.entityName.remove_(event.getEntity()), 60);
 
-            double randomOffset = ThreadLocalRandom.current().nextDouble(-0.4, 0.4);
+            double randomOffset = ThreadLocalRandom.current().nextDouble(0.56, 0.57);
 
             Location entityposition = event.getEntity().getLocation();
             TextDisplay counter = (TextDisplay) entityposition.getWorld().spawnEntity(entityposition.add(randomOffset,randomOffset+1,randomOffset), EntityType.TEXT_DISPLAY);
             counter.text(miniMessage.deserialize("<red>-"+String.format("%.1f", event.getDamage())+"</red>"));
             counter.setBillboard(Billboard.VERTICAL);
             counter.setPersistent(false);
+            event.getDamager().getWorld().playSound(event.getDamager().getLocation(),Sound.ENTITY_EXPERIENCE_ORB_PICKUP ,(float) volume , (float) randomLowPitch);
 
             Bukkit.getScheduler().runTaskLater(EStats.INSTANCE,()->{
             counter.remove();
@@ -49,7 +53,7 @@ public class GetDamage implements Listener {
             LivingEntity living = (LivingEntity) event.getEntity();
 
             int HP = (int) (((living.getHealth() - event.getDamage())/living.getAttribute(org.bukkit.attribute.Attribute.GENERIC_MAX_HEALTH).getValue())*10);
-            System.out.println (HP);
+//Debugging            System.out.println (HP);
 
             switch (HP) {
                 case 0:
