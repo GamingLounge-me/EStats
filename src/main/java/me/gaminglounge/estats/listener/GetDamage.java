@@ -30,9 +30,9 @@ public class GetDamage implements Listener {
     public void onDamagedBy(EntityDamageByEntityEvent event){
 
         EStats.INSTANCE.entityName.add_(event.getEntity());
-        if((event.getDamager() instanceof Player)
-        || (event.getDamager() instanceof Projectile)
-        && (event.getEntity() instanceof LivingEntity)){
+        if((event.getDamager() instanceof Player
+        || event.getDamager() instanceof Projectile)
+        && event.getEntity() instanceof LivingEntity){
             double randomOffset = ThreadLocalRandom.current().nextDouble(-0.4, 0.4);
             double randomLowPitch = ThreadLocalRandom.current().nextDouble(0.56, 0.57);
             double volume = 0.3;
