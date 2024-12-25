@@ -33,14 +33,30 @@ public class PlayerInformation implements Listener {
             double mM = EStats.INSTANCE.statsManager.getMaxMana(p);
             if(aM > mM){
                 double cM = (aM-mM);
-                DecimalFormat df = new DecimalFormat("#.00");
-                df.format(cM);
                 p.sendActionBar(mm.deserialize("<#04a5d1>||||| "+mM+"<gray>/</gray>"+mM+" |||||</#04a5d1> <white>+</white><#04a5d1>"+cM+"</#04a5d1>"));
             }
             else{
-                //This doesn't work at all, it should go from white at 0% to blue(#04a5d1) & white at 50% and blue(#04a5d1) at 100%
-            double g = (((aM/mM)/2));
-            p.sendActionBar(mm.deserialize("<gradient:#04a5d1:gray:white:"+g+">||||| "+aM+"<gray>/</gray>"+mM+" |||||</gradient>"));
+            int sw = (int) ((aM/mM)*5);
+            switch (sw) {
+                case 0:
+                p.sendActionBar(mm.deserialize("<white>||||| "+aM+"<gray>/</gray>"+mM+" |||||</white>"));
+                break;
+                case 1:
+                p.sendActionBar(mm.deserialize("<gradient:#04a5d1:white:white:white:white>||||| "+aM+"<gray>/</gray>"+mM+" |||||</gradient>"));
+                break;
+                case 2:
+                p.sendActionBar(mm.deserialize("<gradient:#04a5d1:#04a5d1:white:white:white>||||| "+aM+"<gray>/</gray>"+mM+" |||||</gradient>"));
+                break;
+                case 3:
+                p.sendActionBar(mm.deserialize("<gradient:#04a5d1:#04a5d1:#04a5d1:white:white>||||| "+aM+"<gray>/</gray>"+mM+" |||||</gradient>"));
+                break;
+                case 4:
+                p.sendActionBar(mm.deserialize("<gradient:#04a5d1:#04a5d1:#04a5d1:#04a5d1:white>||||| "+aM+"<gray>/</gray>"+mM+" |||||</gradient>"));
+                break;
+                case 5:
+                p.sendActionBar(mm.deserialize("<#04a5d1>||||| "+aM+"<gray>/</gray>"+mM+" |||||</#04a5d1>"));
+                break;
+                }
             }
         },0,10);
     }
