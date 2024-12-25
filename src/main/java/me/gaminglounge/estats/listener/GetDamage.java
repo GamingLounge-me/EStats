@@ -35,7 +35,7 @@ public class GetDamage implements Listener {
         && event.getEntity() instanceof LivingEntity){
             double randomOffset = ThreadLocalRandom.current().nextDouble(-0.4, 0.4);
             double randomLowPitch = ThreadLocalRandom.current().nextDouble(0.56, 0.57);
-            double volume = 0.3; //to loud?
+            double volume = 0.2; //to loud?
             
             event.getEntity().setCustomNameVisible(true);
             Bukkit.getScheduler().runTaskLater(EStats.INSTANCE, ()->EStats.INSTANCE.entityName.remove_(event.getEntity()), 60);
