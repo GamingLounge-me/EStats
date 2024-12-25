@@ -20,7 +20,7 @@ import me.gaminglounge.estats.EStats;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 
 
-//Class to catch damage, add/check for custom sources and calculate the real damage beeing dealtl, also want to add textdisplays around the entity position with the damage that was taken.
+//Class to catch damage, add/check for custom sources and calculate the real damage beeing dealt, also want to add textdisplays around the entity position with the damage that was taken.
 public class GetDamage implements Listener {
 
     MiniMessage miniMessage = MiniMessage.miniMessage();
@@ -35,7 +35,7 @@ public class GetDamage implements Listener {
         && event.getEntity() instanceof LivingEntity){
             double randomOffset = ThreadLocalRandom.current().nextDouble(-0.4, 0.4);
             double randomLowPitch = ThreadLocalRandom.current().nextDouble(0.56, 0.57);
-            double volume = 0.3;
+            double volume = 0.3; //to loud?
             
             event.getEntity().setCustomNameVisible(true);
             Bukkit.getScheduler().runTaskLater(EStats.INSTANCE, ()->EStats.INSTANCE.entityName.remove_(event.getEntity()), 60);
