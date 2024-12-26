@@ -9,13 +9,28 @@ public class StatsManager {
     private HashMap<Entity, Double> aktLeben;
     private HashMap<Entity, Double> aktMaxMana;
     private HashMap<Entity, Double> aktMana;
+    private HashMap<Entity, Double> aktMaxLeben;
+
 
     public StatsManager() {
 
         aktLeben = new HashMap<>();
+        aktMaxLeben = new HashMap<>();
         aktMaxMana = new HashMap<>();
         aktMana = new HashMap<>();
 
+    }
+
+    public void setMaxLeben(Entity e, Double d) {
+        aktMaxLeben.put(e, d);
+    }
+    
+    public Double getMaxLeben(Entity e) {
+        return aktMaxLeben.get(e);
+    }
+    
+    public void removeMaxLeben(Entity e) {
+        aktMaxLeben.remove(e);
     }
 
     public void setAktLeben(Entity e, Double d) {
