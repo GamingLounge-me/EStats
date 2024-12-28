@@ -2,9 +2,4 @@ name: EStats
 version: '1.0-SNAPSHOT'
 main: me.gaminglounge.estats.EStats
 api-version: '1.21'
-dependencies: #this works for now
-  server:
-    CommandAPI:
-      load: BEFORE
-      required: true
-      join-classpath: true
+loader: me.gaminglounge.estats.EStatsLoader

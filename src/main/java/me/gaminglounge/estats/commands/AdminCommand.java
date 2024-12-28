@@ -30,9 +30,9 @@ public class AdminCommand {
                         @SuppressWarnings("null")
                         double mana = (double) args.get("Mana");
                         EStats.INSTANCE.statsManager.setAktMana(target,mana);
-                    })
-
-                ).withSubcommand(new CommandAPICommand("setMaxMana")
+                    }))
+                    
+                .withSubcommand(new CommandAPICommand("setMaxMana")
                 .withArguments(new DoubleArgument("MaxMana"))
                 .withOptionalArguments(new EntitySelectorArgument.OneEntity("Spieler"))
                 .executesPlayer((player, args) -> {
@@ -43,9 +43,35 @@ public class AdminCommand {
                     @SuppressWarnings("null")
                     double mana = (double) args.get("MaxMana");
                     EStats.INSTANCE.statsManager.setMaxMana(target,mana);
-                })
+                }))
 
-                ).withSubcommand(new CommandAPICommand("setLvl")
+                .withSubcommand(new CommandAPICommand("setMaxLeben")
+                .withArguments(new DoubleArgument("MaxLeben"))
+                .withOptionalArguments(new EntitySelectorArgument.OneEntity("Spieler"))
+                .executesPlayer((player, args) -> {
+                    Player target = (Player) args.get("Spieler");
+                    //Wenn null -> target = executor
+                    if (target == null) target = player;
+
+                    @SuppressWarnings("null")
+                    double leben = (double) args.get("MaxLeben");
+                    EStats.INSTANCE.statsManager.setMaxLeben(target,leben);
+                }))
+                
+                .withSubcommand(new CommandAPICommand("setAktLeben")
+                .withArguments(new DoubleArgument("Leben"))
+                .withOptionalArguments(new EntitySelectorArgument.OneEntity("Spieler"))
+                .executesPlayer((player, args) -> {
+                    Player target = (Player) args.get("Spieler");
+                    //Wenn null -> target = executor
+                    if (target == null) target = player;
+
+                    @SuppressWarnings("null")
+                    double leben = (double) args.get("Leben");
+                    EStats.INSTANCE.statsManager.setAktLeben(target,leben);
+                }))
+
+                .withSubcommand(new CommandAPICommand("setAktLvl")
                 .withArguments(new IntegerArgument("Lvl"))
                 .withOptionalArguments(new EntitySelectorArgument.OneEntity("Spieler"))
                 .executesPlayer((player, args) -> {
@@ -62,5 +88,4 @@ public class AdminCommand {
                 })
                 ).register();
     }
-
 }

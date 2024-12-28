@@ -40,34 +40,72 @@ public class PlayerInformation implements Listener {
 
             if(aM > mM){
                 double cM = (aM-mM);
-                p.sendActionBar(mm.deserialize("<#04a5d1>||||| "+mM+"<gray>/</gray>"+mM+" |||||</#04a5d1> <white>+</white><#04a5d1>"+cM+"</#04a5d1>"));
+                p.sendActionBar(mm.deserialize("<red>"+String.format("%.1f",aL)+"</red><gray> | </gray><red>"+String.format("%.1f",mL)+" \u2665</red>"+
+                "    "+
+                "<#04a5d1>\u258A\u258A\u258A\u258A\u258A "+String.format("%.1f",aM+(mM-aM))+"<gray> | </gray>"+String.format("%.1f",mM)+" \u258A\u258A\u258A\u258A\u258A</#04a5d1> <white>+</white><#04a5d1>"+String.format("%.1f",cM)+"</#04a5d1>"));
             }
             else{
             int sw = (int) ((aM/mM)*5);
             //If we wanna uses more than just a health number, make this all strings and do the same for health, to just add it using 10+2 cases total.
             switch (sw) {
                 case 0:
-                p.sendActionBar(mm.deserialize("<bold><red>"+aL+"</red></bold><gray>/<bold></gray><red>"+mL+"</red>"+
-                "                       "+
-                "<white>||||| "+aM+"</bold><gray>/<bold></gray>"+mM+" |||||</white></bold>"));
+                p.sendActionBar(mm.deserialize("<red>"+String.format("%.1f",aL)+"</red><gray> | </gray><red>"+String.format("%.1f",mL)+" \u2665</red>"+
+                "    "+
+                "<#89def5>\u258A</#89def5><gradient:white:gray:gray>\u258A\u258A\u258A\u258A "+String.format("%.1f",aM)+"<gray> | </gray>"+String.format("%.1f",mM)+" \u258A\u258A\u258A\u258A\u258A</gradient>"));
                 break;
                 case 1:
-                p.sendActionBar(mm.deserialize("<gradient:#04a5d1:white:white:white:white>||||| "+aM+"<gray>/</gray>"+mM+" |||||</gradient>"));
+                p.sendActionBar(mm.deserialize("<red>"+String.format("%.1f",aL)+"</red><gray> | </gray><red>"+String.format("%.1f",mL)+" \u2665</red>"+
+                "    "+
+                "<gradient:#04a5d1:white:white:white:gray>\u258A\u258A\u258A\u258A\u258A "+String.format("%.1f",aM)+"<gray> | </gray>"+String.format("%.1f",mM)+" \u258A\u258A\u258A\u258A\u258A</gradient>"));
                 break;
                 case 2:
-                p.sendActionBar(mm.deserialize("<gradient:#04a5d1:#04a5d1:white:white:white>||||| "+aM+"<gray>/</gray>"+mM+" |||||</gradient>"));
+                p.sendActionBar(mm.deserialize("<red>"+String.format("%.1f",aL)+"</red><gray> | </gray><red>"+String.format("%.1f",mL)+" \u2665</red>"+
+                "    "+
+                "<gradient:#04a5d1:#04a5d1:white:white:gray>\u258A\u258A\u258A\u258A\u258A "+String.format("%.1f",aM)+"<gray> | </gray>"+String.format("%.1f",mM)+" \u258A\u258A\u258A\u258A\u258A</gradient>"));
                 break;
                 case 3:
-                p.sendActionBar(mm.deserialize("<gradient:#04a5d1:#04a5d1:#04a5d1:white:white>||||| "+aM+"<gray>/</gray>"+mM+" |||||</gradient>"));
+                p.sendActionBar(mm.deserialize("<red>"+String.format("%.1f",aL)+"</red><gray> | </gray><red>"+String.format("%.1f",mL)+" \u2665</red>"+
+                "    "+
+                "<gradient:#04a5d1:#04a5d1:#04a5d1:white:gray>\u258A\u258A\u258A\u258A\u258A "+String.format("%.1f",aM)+"<gray> | </gray>"+String.format("%.1f",mM)+" \u258A\u258A\u258A\u258A\u258A</gradient>"));
                 break;
                 case 4:
-                p.sendActionBar(mm.deserialize("<gradient:#04a5d1:#04a5d1:#04a5d1:#04a5d1:white>||||| "+aM+"<gray>/</gray>"+mM+" |||||</gradient>"));
+                p.sendActionBar(mm.deserialize("<red>"+String.format("%.1f",aL)+"</red><gray> | </gray><red>"+String.format("%.1f",mL)+" \u2665</red>"+
+                "    "+
+                "<gradient:#04a5d1:#04a5d1:#04a5d1:#04a5d1:white>\u258A\u258A\u258A\u258A\u258A "+String.format("%.1f",aM)+"<gray> | </gray>"+String.format("%.1f",mM)+" \u258A\u258A\u258A\u258A\u258A</gradient>"));
                 break;
                 case 5:
-                p.sendActionBar(mm.deserialize("<#04a5d1>||||| "+aM+"<gray>/</gray>"+mM+" |||||</#04a5d1>"));
+                p.sendActionBar(mm.deserialize("<red>"+String.format("%.1f",aL)+"</red><gray> | </gray><red>"+String.format("%.1f",mL)+" \u2665</red>"+
+                "    "+
+                "<#04a5d1>\u258A\u258A\u258A\u258A\u258A "+String.format("%.1f",aM)+"<gray> | </gray>"+String.format("%.1f",mM)+" \u258A\u258A\u258A\u258A\u258A</#04a5d1>"));
                 break;
                 }
             }
         },0,10);
     }
 }
+
+
+
+/*
+# Name/ID: "Saurons Stab"
+# Itemtype: "Carrot on a stick"
+# Resourcepack ID: "7"
+# Stats:
+#   Mana: +10
+#   Health_in_percentage: -5
+# Functions:
+#   Keybild: shift+leftkey+leftkey+rightkey
+#       fireball:
+#           coldown: 4
+#           cost:
+#               mana: 20
+#       projectile:
+#               ./projectiles/generic_fireball_2.Yaml
+#           trail:
+#               ./trails/generic_breath_2.Yaml
+#           damage:
+#               fire: 20
+# Header: "Saurons Stab"
+# Description:
+# Sauron kann gar keine Feuerbälle schießen, deswegen tun wir es.
+ */
