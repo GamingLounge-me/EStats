@@ -45,6 +45,7 @@ public class GetDamage implements Listener {
             counter.text(miniMessage.deserialize("<red>-"+String.format("%.1f", event.getDamage())+"</red>"));
             counter.setBillboard(Billboard.VERTICAL);
             counter.setPersistent(false);
+
             if(event.getDamager() instanceof Projectile proj)
                 if(proj.getShooter() instanceof Player p)
                 {
@@ -100,6 +101,9 @@ public class GetDamage implements Listener {
                 default:
                     break;                   
             }
+//This is the place to implement the damage, which we will get via checking the Item's Stats
+        event.setDamage(0);
+
         }
     }
 }
